@@ -1,4 +1,3 @@
-import axios from 'axios'
 import config from "../config/apiConfig";
 
 class Api {
@@ -8,8 +7,8 @@ class Api {
 
 	async countries() {
 		try {
-			const res = await axios.get(`${this.url}/countries`)
-			return res.data
+			const res = await fetch(`${this.url}/countries`).then(res => res.json())
+			return res
 		} catch (err) {
 			console.log(err);
 			return Promise.reject(err)
@@ -18,8 +17,8 @@ class Api {
 
 	async cities() {
 		try {
-			const res = await axios.get(`${this.url}/cities`)
-			return res.data
+			const res = await fetch(`${this.url}/cities`).then(res => res.json())
+			return res
 		} catch (err) {
 			console.log(err);
 			return Promise.reject(err)
@@ -28,10 +27,18 @@ class Api {
 
 	async prices(params) {
 		try {
-			const res = await axios.get(`${this.url}/prices/cheap`,{
-				params
-			})
-			return res.data
+			const res = await fetch(`${this.url}/prices/cheap?${params}`).then(res => res.json())
+			return res
+		} catch (err) {
+			console.log(err);
+			return Promise.reject(err)
+		}
+	}
+
+	async airlines() {
+		try {
+			const res = await fetch(`${this.url}/airlines`).then(res => res.json())
+			return res
 		} catch (err) {
 			console.log(err);
 			return Promise.reject(err)

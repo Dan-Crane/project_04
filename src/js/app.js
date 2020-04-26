@@ -4,16 +4,11 @@ import locations from "./store/locations";
 import formUI from "./vuews/form";
 import currencyUI from "./vuews/currency";
 
-locations.init().then(res => {
-	console.log(locations);
-
-})
-
 document.addEventListener('DOMContentLoaded', () => {
-	initApp()
 	const form = formUI.form
 
 	//Events
+	initApp()
 	form.addEventListener('submit', (e) => {
 		e.preventDefault()
 		onFormSubmit()
@@ -34,6 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		const currency = currencyUI.currencyValue
 
 		console.log(origin, destination, depart_date, return_date)
-		await locations.fetchTickets( {origin, destination, depart_date, return_date, currency})
+		await locations.fetchTickets(`origin=${origin}&destination=${destination}&depart_date=${depart_date}&return_date=${return_date}&currency=${currency}`)
 	}
 })
